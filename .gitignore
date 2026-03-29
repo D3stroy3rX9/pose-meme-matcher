@@ -54,3 +54,5 @@ memes/*/*.gif
 
 # Config overrides
 config/local.json
+models/
+pose_landmarker.task

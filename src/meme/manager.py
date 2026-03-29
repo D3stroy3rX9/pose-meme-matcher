@@ -1,101 +1,74 @@
 """
 Meme collection manager.
-
-This module handles:
-- Scanning meme folders
-- Indexing memes by gesture type
-- Random selection from matching memes
-- Hot-reloading (future feature)
 """
 
-import os
 import random
 from pathlib import Path
 
 
 class MemeManager:
-    """Manages the meme collection."""
-    
+    """Manages the meme collection — scanning, indexing, and random selection."""
+
+    SUPPORTED = {'.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp'}
+
     def __init__(self, memes_dir="memes"):
-        """
-        Initialize the meme manager.
-        
-        Args:
-            memes_dir: Path to the memes directory
-        """
         self.memes_dir = Path(memes_dir)
         self.meme_index = {}
-        self.supported_formats = ['.png', '.jpg', '.jpeg', '.gif']
-        
-        # TODO: Scan and index all memes
         self._scan_memes()
-    
+
     def _scan_memes(self):
-        """Scan the memes directory and build an index."""
-        # TODO: Walk through each gesture subfolder
-        # TODO: Find all image files
-        # TODO: Build index: {gesture_name: [list of image paths]}
-        
-        print(f"Scanning memes directory: {self.memes_dir}")
-        
+        """Scan the memes directory and build a gesture → [paths] index."""
+        self.meme_index = {}
+
         if not self.memes_dir.exists():
-            print(f"Warning: Memes directory not found: {self.memes_dir}")
+            print(f"Warning: memes directory not found: {self.memes_dir}")
             return
-        
-        # TODO: Implement scanning logic
-        pass
-    
+
+        for gesture_dir in self.memes_dir.iterdir():
+            if not gesture_dir.is_dir():
+                continue
+            name = gesture_dir.name
+            files = [
+                str(f.resolve())
+                for f in gesture_dir.iterdir()
+                if f.suffix.lower() in self.SUPPORTED
+            ]
+            self.meme_index[name] = files
+            status = f"{len(files)} meme(s)" if files else "empty"
+            print(f"  {name}: {status}")
+
     def get_meme_for_gesture(self, gesture_name):
         """
-        Get a random meme for the specified gesture.
-        
-        Args:
-            gesture_name: Name of the gesture (e.g., 'thumbs_up')
-            
+        Return a random meme path for the given gesture, falling back to default.
+
         Returns:
-            str: Path to a meme image, or None if no memes found for this gesture
+            str path or None
         """
-        # TODO: Look up gesture in index
-        # TODO: Randomly select one meme if multiple available
-        # TODO: Return path
-        
-        # If gesture not found or no memes, try default
-        if gesture_name is None or gesture_name not in self.meme_index:
-            return self.get_default_meme()
-        
-        return None
-    
+        if gesture_name and gesture_name in self.meme_index and self.meme_index[gesture_name]:
+            return random.choice(self.meme_index[gesture_name])
+        return self.get_default_meme()
+
     def get_default_meme(self):
-        """Get a random meme from the default folder."""
-        # TODO: Return random meme from 'default' gesture
-        return None
-    
+        """Return a random meme from the 'default' folder."""
+        defaults = self.meme_index.get("default", [])
+        return random.choice(defaults) if defaults else None
+
     def get_stats(self):
-        """
-        Get statistics about the meme collection.
-        
-        Returns:
-            dict: Statistics like total memes, memes per gesture, etc.
-        """
-        # TODO: Calculate and return stats
-        stats = {
-            'total_memes': 0,
-            'gestures': {},
+        """Return dict with total count and per-gesture breakdown."""
+        gestures = {k: len(v) for k, v in self.meme_index.items()}
+        return {
+            "total_memes": sum(gestures.values()),
+            "gestures": gestures,
         }
-        return stats
-    
+
     def reload(self):
-        """Reload the meme index (for hot-reloading feature)."""
-        # TODO: Clear current index
-        # TODO: Re-scan memes directory
+        """Re-scan the meme directory (hot-reload support)."""
+        print("Reloading memes...")
         self._scan_memes()
+        stats = self.get_stats()
+        print(f"Loaded {stats['total_memes']} meme(s) across {len(stats['gestures'])} gesture(s).")
 
 
-# For testing the meme manager independently
 if __name__ == "__main__":
-    print("MemeManager class created (stub)")
-    print("This will scan and index your meme collection")
-    
-    # Test instantiation
-    manager = MemeManager()
-    print(f"Stats: {manager.get_stats()}")
+    mgr = MemeManager()
+    print(mgr.get_stats())
