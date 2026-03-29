@@ -1,0 +1,48 @@
+{
+  "gestures": {
+    "arms_crossed": {
+      "description": "Arms crossed over chest",
+      "enabled": true,
+      "confidence_threshold": 0.7,
+      "cooldown_ms": 500
+    },
+    "thumbs_up": {
+      "description": "Thumbs up gesture",
+      "enabled": true,
+      "confidence_threshold": 0.7,
+      "cooldown_ms": 500
+    },
+    "peace_sign": {
+      "description": "Peace sign / V sign with two fingers",
+      "enabled": true,
+      "confidence_threshold": 0.7,
+      "cooldown_ms": 500
+    },
+    "thinking": {
+      "description": "Hand on chin in thinking pose",
+      "enabled": true,
+      "confidence_threshold": 0.7,
+      "cooldown_ms": 500
+    },
+    "facepalm": {
+      "description": "Hand covering face",
+      "enabled": true,
+      "confidence_threshold": 0.7,
+      "cooldown_ms": 500
+    },
+    "shrug": {
+      "description": "Shoulders raised with hands out",
+      "enabled": true,
+      "confidence_threshold": 0.7,
+      "cooldown_ms": 500
+    }
+  },
+  "settings": {
+    "update_interval_ms": 100,
+    "min_detection_confidence": 0.5,
+    "min_tracking_confidence": 0.5,
+    "camera_index": 0,
+    "camera_width": 640,
+    "camera_height": 480
+  }
+}

@@ -1,11 +1,13 @@
 # Default Memes
 
-Add memes here that should appear when no specific gesture is detected.
+Drop your "default/neutral" memes here!
 
-Good examples:
-- "Strike a pose!" images
-- Waiting/neutral expressions
-- "What are you doing?" reactions
-- Generic funny images
+These show when NO gesture is detected.
 
-This is what users see before making a gesture, so make it fun! 🎭
+Good meme ideas:
+- "Waiting patiently" expressions
+- Neutral faces
+- "Do something" looks
+- App branding/logo
+
+Supported formats: PNG, JPG, JPEG

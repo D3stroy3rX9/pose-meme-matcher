@@ -1,85 +1,120 @@
-# 🎭 Pose-Meme Matcher
+# 🎭 Pose-to-Meme Matcher
 
-A real-time desktop app that detects your gestures via webcam and matches them to hilarious memes!
+A real-time desktop application that detects your gestures via webcam and displays matching memes!
 
 ## 🚀 Features
 
-- **Real-time pose detection** using MediaPipe
-- **Gesture recognition** for common poses (thumbs up, peace sign, facepalm, etc.)
-- **Split-screen UI**: Webcam feed on left, matched meme on right
-- **Easy meme management**: Just drop images into folders
-- **Fast & responsive**: Sub-second meme matching
+- Real-time pose detection using MediaPipe
+- Gesture-based meme matching
+- Easy meme management (just drag & drop!)
+- Smooth, responsive UI
+- 100% free and open-source
 
 ## 📋 Requirements
 
-- Python 3.9+
+- Python 3.9 or higher
 - Webcam
+- Windows/Mac/Linux
 
 ## 🛠️ Installation
 
-```bash
-# Clone the repository
-git clone <your-repo-url>
-cd pose-meme-matcher
+1. **Clone or download this project**
 
-# Install dependencies
+2. **Install dependencies:**
+```bash
 pip install -r requirements.txt
 ```
 
-## 🎮 Usage
-
+3. **Run the app:**
 ```bash
-python src/main.py
+python main.py
 ```
 
-## 📁 Adding Memes
-
-1. Navigate to the `memes/` folder
-2. Choose the gesture subfolder (e.g., `thumbs_up/`, `facepalm/`)
-3. Drop your meme images (PNG, JPG, GIF)
-4. The app will automatically detect and use them!
-
-### Supported Gestures
-
-- `arms_crossed` - Arms crossed over chest
-- `thumbs_up` - Thumbs up gesture
-- `peace_sign` - Peace/victory sign
-- `facepalm` - Hand covering face
-- `thinking` - Hand on chin
-- `shrug` - Shoulder shrug with arms out
-- `salute` - Military salute
-- `default` - Shown when no gesture detected
-
-## 🏗️ Project Structure
+## 📁 Project Structure
 
 ```
 pose-meme-matcher/
-├── memes/              # Meme image storage
+├── main.py                 # Main application entry point
+├── src/
+│   ├── ui/
+│   │   └── app_window.py   # GUI window and layout
+│   ├── pose/
+│   │   ├── detector.py     # MediaPipe pose detection
+│   │   └── gestures.py     # Gesture pattern recognition
+│   └── meme/
+│       └── manager.py      # Meme indexing and selection
+├── memes/                  # Your meme collection
 │   ├── arms_crossed/
 │   ├── thumbs_up/
 │   ├── peace_sign/
-│   └── ...
-├── src/
-│   ├── main.py         # Entry point
-│   ├── pose_detector.py    # MediaPipe pose detection
-│   ├── gesture_recognizer.py  # Gesture pattern matching
-│   ├── meme_manager.py     # Meme indexing & selection
-│   └── ui.py           # GUI interface
-├── requirements.txt
-└── README.md
+│   ├── thinking/
+│   ├── facepalm/
+│   ├── shrug/
+│   └── default/            # Shown when no gesture detected
+├── config/
+│   └── gestures.json       # Gesture detection patterns
+├── assets/
+│   └── placeholder.png     # Default image
+└── docs/
+    ├── GESTURES.md         # List of supported gestures
+    └── ADDING_MEMES.md     # How to add new memes
 ```
 
-## 🤝 Contributing
+## 🎨 Adding Memes
 
-This is a hobby project! Feel free to:
+**Super simple!**
+
+1. Find or create a meme image (PNG, JPG, GIF)
+2. Drop it into the appropriate folder in `memes/`
+   - Example: Put a facepalm meme in `memes/facepalm/`
+3. The app will automatically detect it on next run!
+
+**File naming**: Doesn't matter! Name it whatever you want.
+
+See [ADDING_MEMES.md](docs/ADDING_MEMES.md) for more details.
+
+## 🤚 Supported Gestures (MVP)
+
+- **Arms Crossed**: Cross your arms over your chest
+- **Thumbs Up**: Classic thumbs up gesture
+- **Peace Sign**: Two fingers up (V sign)
+- **Thinking**: Hand on chin
+- **Facepalm**: Hand covering face
+- **Shrug**: Shoulders up, hands out
+
+See [GESTURES.md](docs/GESTURES.md) for detailed pose descriptions.
+
+## ⚙️ Configuration
+
+Edit `config/gestures.json` to:
+- Adjust gesture detection sensitivity
 - Add new gesture patterns
-- Improve detection accuracy
-- Submit cool meme collections
+- Modify cooldown timers
+
+## 🐛 Troubleshooting
+
+**Webcam not detected?**
+- Check if another app is using the webcam
+- Try changing the camera index in settings
+
+**Gestures not detecting?**
+- Ensure good lighting
+- Stand 3-6 feet from camera
+- Make gestures clear and deliberate
+
+**Memes not showing?**
+- Check file format (PNG, JPG, JPEG supported)
+- Ensure images are in correct gesture folder
 
 ## 📝 License
 
-MIT License - Do whatever you want with it!
+MIT License - Free to use, modify, and share!
+
+## 🙏 Credits
+
+- **MediaPipe** by Google - Pose detection
+- **You!** - For the memes and vibes
 
 ---
 
-Made with ❤️ and way too much free time
+**Have fun! 🎉**

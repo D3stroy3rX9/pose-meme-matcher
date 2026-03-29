@@ -1,113 +1,84 @@
-# 🚀 Quick Start Guide
+# ⚡ Quick Start Guide
 
-Get your Pose Meme Matcher up and running in 5 minutes!
+Get up and running in 5 minutes!
 
-## Prerequisites
+## Step 1: Install Dependencies
 
-- Python 3.9 or higher
-- Webcam
-- ~500MB free space
-
-## Installation
-
-### Step 1: Clone the Repository
 ```bash
-git clone <your-repo-url>
 cd pose-meme-matcher
-```
-
-### Step 2: Install Dependencies
-```bash
 pip install -r requirements.txt
 ```
 
-This will install:
-- OpenCV (for webcam access)
-- MediaPipe (for pose detection)
-- Pillow (for image handling)
-- NumPy (for calculations)
+This installs:
+- `opencv-python` - Webcam access
+- `mediapipe` - Pose detection
+- `pillow` - Image handling
+- `numpy` - Math operations
 
-### Step 3: Add Some Memes
+## Step 2: Generate Placeholder Image
 
-Before running, add at least a few memes to get started:
-
-1. Navigate to `memes/default/`
-2. Add 2-3 funny images (PNG, JPG, GIF)
-3. Optionally add memes to other gesture folders like:
-   - `memes/thumbs_up/`
-   - `memes/facepalm/`
-   - `memes/peace_sign/`
-
-See [MEME_GUIDE.md](MEME_GUIDE.md) for detailed instructions.
-
-### Step 4: Run the App
 ```bash
-python src/main.py
+python create_placeholder.py
 ```
 
-That's it! 🎉
+This creates `assets/placeholder.png` shown when no meme is available.
 
-## First Run Tips
+## Step 3: Add Some Memes
 
-1. **Grant camera permissions** when prompted
-2. **Position yourself** so your upper body is visible in the webcam
-3. **Try different gestures**:
-   - Thumbs up
-   - Peace sign
-   - Hand on chin (thinking)
-   - Facepalm
-   - Arms crossed
+Add at least one meme to get started:
 
-4. **Watch the memes change** as you switch poses!
+1. Download or find a meme image
+2. Save it to the appropriate folder:
+   - `memes/thumbs_up/` for thumbs up memes
+   - `memes/facepalm/` for facepalm memes
+   - `memes/default/` for default/neutral memes
+   - etc.
 
-## Troubleshooting
+**Tip**: Start with 2-3 memes in `memes/default/` and `memes/thumbs_up/`
 
-### "Could not open webcam"
-- Make sure your webcam is connected
-- Close other apps using the camera (Zoom, Teams, etc.)
-- Check camera permissions on your system
+## Step 4: Run the App
 
-### "No memes found"
-- Add some images to `memes/default/` folder
-- Click "Reload Memes" button in the app
-- Check file extensions are supported (.png, .jpg, .gif)
+```bash
+python main.py
+```
 
-### App is laggy
-- Close other heavy applications
-- Reduce number of memes (stick to 20-40 total)
-- Make sure images aren't huge (resize to ~1000px)
-
-### Gestures not detecting
-- Make sure you're fully visible in webcam
-- Try exaggerating the gesture
-- Check lighting (poor lighting affects pose detection)
-- See gesture tips in [MEME_GUIDE.md](MEME_GUIDE.md)
+**Current status**: The app skeleton is ready but core functionality needs implementation!
 
 ## Next Steps
 
-1. **Add more memes** - see MEME_GUIDE.md
-2. **Test different gestures** - see what works best for you
-3. **Share with friends** - it's more fun with an audience!
-4. **Customize** - edit `src/gesture_config.py` to tune detection
+Since this is still in development, the next phase is to implement:
+1. Phase 1: Basic UI with webcam feed
+2. Phase 2: Pose detection integration
+3. Phase 3: Gesture recognition
+4. Phase 4: Meme matching and display
 
-## Performance Notes
+## Testing Individual Components
 
-**Expected Performance:**
-- 20-30 FPS webcam feed
-- <1 second gesture recognition
-- Instant meme switching
+Once implemented, you can test parts independently:
 
-**If performance is poor:**
-- Update graphics drivers
-- Close background apps
-- Check CPU isn't thermal throttling
+```bash
+# Test meme manager
+python -m src.meme.manager
 
-## Need Help?
+# Test pose detector (needs webcam)
+python -m src.pose.detector
 
-- Read the [MEME_GUIDE.md](MEME_GUIDE.md) for meme tips
-- Check [README.md](README.md) for project overview
-- Review gesture patterns in `src/gesture_config.py`
+# Test UI window
+python -m src.ui.app_window
+```
+
+## Troubleshooting
+
+### ImportError: No module named 'cv2'
+→ Run `pip install -r requirements.txt`
+
+### Webcam not found
+→ Make sure no other app is using your webcam
+→ Try changing `camera_index` in `config/gestures.json`
+
+### ModuleNotFoundError: No module named 'src'
+→ Run from the project root directory: `cd pose-meme-matcher`
 
 ---
 
-Have fun! 🎭🎉
+**Ready to build Phase 1?** Let's implement the foundation! 🚀
